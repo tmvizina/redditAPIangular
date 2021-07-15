@@ -1,0 +1,49 @@
+
+<body>
+<h1>Reddit</h1>
+<form #searchForm="ngForm" (ngSubmit)="callReddit(searchForm.form.value.sub)">
+  <label>Search reddit by subreddit</label>
+  <br />
+  <input type="text" name="sub" ngModel />
+  <input type="submit" value="Search" />
+</form>
+
+
+<div  id="one" *ngFor="let child of reddit.data.children|slice:0:1">
+  <img src="{{child.data.thumbnail}}">
+<p>Title: {{child.data.title}}</p>
+<a href="https://www.reddit.com/{{child.data.permalink}}" >View Full Site</a>
+</div>
+
+<button type="button" id="oneb">Show One</button>
+<script>
+document.getElementById("oneb")
+        .addEventListener("click", function() {
+  document.getElementById("one").style.visibility=visible;
+  document.getElementById("many").style.visibility=hidden;
+});
+</script>
+
+<button style type="button" id="manyb">Show Many</button>
+<div id="many" *ngFor="let child of reddit.data.children|slice:0:10">
+  <img src="{{child.data.thumbnail}}">
+<p>Title: {{child.data.title}}</p>
+<a href="https://www.reddit.com/{{child.data.permalink}}" >View Full Site</a>
+</div>
+
+<script>
+  document.getElementById("manyb")
+          .addEventListener("click", function() {
+    document.getElementById("one").style.visibility=hidden;
+    document.getElementById("many").style.visibility=visible;
+  });
+  </script>
+  
+
+<!-- <ng-container *ngFor="let child of reddit.data.children|slice:0:10">
+  <li (click)="callReddit(child)">Title: {{child.data.title}}</li> 
+</ng-container> -->
+
+
+
+
